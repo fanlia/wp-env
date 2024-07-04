@@ -10,6 +10,8 @@ services:
       WORDPRESS_DB_USER: exampleuser
       WORDPRESS_DB_PASSWORD: examplepass
       WORDPRESS_DB_NAME: exampledb
+    env_file:
+      - .env
     volumes:
       - "./versions/${WORDPRESS_VERSION}/wordpress:/var/www/html"
 
