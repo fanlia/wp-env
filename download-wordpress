@@ -1,0 +1,72 @@
+#!/usr/bin/env -S node --env-file=.env
+
+const fs = require('node:fs')
+const path = require('node:path')
+const { execSync } = require('node:child_process')
+
+const download = async () => {
+
+  console.log('fetch versions')
+
+  //const html = fs.readFileSync('release.html', 'utf8')
+  const html = await fetch('https://wordpress.org/download/releases/').then(res => res.text())
+  const url_re = /https:\/\/wordpress\.org\/wordpress-(\d+\.\d+\.\d+).tar\.gz/g
+  const version_re = /\d+\.\d+\.\d+/
+
+  let versions_maybe_redundant = (html.match(url_re) || []).map(url => {
+    const version = url.match(version_re)[0]
+
+    return {
+      url,
+      version,
+    }
+  })
+
+  const version_map = {}
+  let versions = []
+
+  for (const d of versions_maybe_redundant) {
+    if (version_map[d.version]) continue
+    versions.push(d)
+    version_map[d.version] = true
+  }
+  //console.log(JSON.stringify(versions, null, 2))
+
+  const user_defined_version = process.env.WORDPRESS_VERSION
+
+  const version = versions.find(d => d.version === user_defined_version)
+
+  if (!version) {
+    console.log(`WORDPRESS_VERSION=${user_defined_version} not found, please check .env file`)
+    console.log('available versions:')
+    console.log(versions.map(d => `- ${d.version}`).slice(0, 10).join('\n'))
+    process.exit()
+  }
+
+  console.log('download version', version.version)
+
+  const versions_path = path.join(__dirname, 'versions', version.version)
+
+  if (!fs.existsSync(versions_path)) {
+    fs.mkdirSync(versions_path, { recursive: true })
+  }
+
+  const filepath = path.join(versions_path, `wordpress-${version.version}.tar.gz`)
+
+  if (!fs.existsSync(filepath)) {
+    const wget_cmd = `wget -P ${versions_path} ${version.url}`
+    execSync(wget_cmd, { stdio: 'inherit' })
+  }
+
+  const wordpress_path = path.join(versions_path, 'wordpress')
+
+  if (!fs.existsSync(wordpress_path)) {
+    const tar_cmd = `tar zxf ${filepath} -C ${versions_path}`
+    execSync(tar_cmd, { stdio: 'inherit' })
+  }
+
+  console.log('finished')
+}
+
+download()
+

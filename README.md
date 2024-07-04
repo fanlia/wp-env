@@ -8,6 +8,7 @@ wordpress development environment
 cp .env.example .env
 vim .env
 
+./download-wordpress
 sudo docker compose up -d
 
 # open http://localhost:8080
