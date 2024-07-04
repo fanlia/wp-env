@@ -2,7 +2,7 @@
 services:
 
   wordpress:
-    image: wordpress:6.5
+    image: "wordpress:${WORDPRESS_VERSION}"
     ports:
       - 8080:80
     environment:
