@@ -65,6 +65,10 @@ const download = async () => {
     execSync(tar_cmd, { stdio: 'inherit' })
   }
 
+  const wordpress_content_path = path.join(wordpress_path, 'wp-content')
+  const chmod_cmd = `chmod -R 777 ${wordpress_content_path}`
+  execSync(tar_cmd, { stdio: 'inherit' })
+
   console.log('finished')
 }
 

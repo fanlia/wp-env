@@ -13,7 +13,6 @@ vim .env
 # to install plugins
 # add to wp-config.php
 # define("FS_METHOD", "direct");
-# chmod +777 -R wp-content/
 
 sudo docker compose up -d
 
