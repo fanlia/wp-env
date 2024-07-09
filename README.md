@@ -16,5 +16,6 @@ vim .env
 
 sudo docker compose up -d
 
-# open http://localhost:8080
+# wordpress http://localhost:8080
+# adminer http://localhost:8081
 ```
