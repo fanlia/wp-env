@@ -23,7 +23,7 @@ services:
       MYSQL_DATABASE: exampledb
       MYSQL_USER: exampleuser
       MYSQL_PASSWORD: examplepass
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      MYSQL_ROOT_PASSWORD: 123456
     volumes:
       - "./versions/${WORDPRESS_VERSION}/db:/var/lib/mysql"
   adminer:
