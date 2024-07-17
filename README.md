@@ -16,6 +16,9 @@ vim .env
 
 sudo docker compose up -d
 
+# config permalinks to Post name, if not the wp-json api will not enabled
+# http://localhost:8080/wp-admin/options-permalink.php
+
 # wordpress http://localhost:8080
 # adminer http://localhost:8081
 ```

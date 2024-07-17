@@ -10,8 +10,8 @@ const download = async () => {
 
   //const html = fs.readFileSync('release.html', 'utf8')
   const html = await fetch('https://wordpress.org/download/releases/').then(res => res.text())
-  const url_re = /https:\/\/wordpress\.org\/wordpress-(\d+\.\d+\.\d+).tar\.gz/g
-  const version_re = /\d+\.\d+\.\d+/
+  const url_re = /https:\/\/wordpress\.org\/wordpress-(\d+\.\d+(\.\d+)?).tar\.gz/g
+  const version_re = /\d+\.\d+(\.\d+)?/
 
   let versions_maybe_redundant = (html.match(url_re) || []).map(url => {
     const version = url.match(version_re)[0]
