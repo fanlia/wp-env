@@ -29,6 +29,8 @@ services:
       MYSQL_USER: exampleuser
       MYSQL_PASSWORD: examplepass
       MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - "./versions/${WORDPRESS_VERSION}/db:/var/lib/mysql"
   adminer:
     image: adminer
     ports:
