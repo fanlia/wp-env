@@ -8,8 +8,6 @@ wordpress development environment
 cp .env.example .env
 vim .env
 
-./download-wordpress
-
 # create the_theme directroy to develpe a new theme
 mkdir the_theme
 
