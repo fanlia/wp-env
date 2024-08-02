@@ -10,9 +10,8 @@ vim .env
 
 ./download-wordpress
 
-# to install plugins
-# add to wp-config.php
-# define("FS_METHOD", "direct");
+# create the_theme directroy to develpe a new theme
+mkdir the_theme
 
 sudo docker compose up -d
 
