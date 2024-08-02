@@ -18,6 +18,7 @@ services:
       - .env
     volumes:
       - "./versions/${WORDPRESS_VERSION}/wordpress:/var/www/html"
+      - "./the-theme:/var/www/html/wp-content/themes/the-theme"
 
   db:
     image: mysql:8.0
