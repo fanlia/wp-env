@@ -65,17 +65,8 @@ const download = async () => {
     execSync(tar_cmd, { stdio: 'inherit' })
   }
 
-  const wordpress_content_path = path.join(wordpress_path, 'wp-content')
-  const chmod_cmd = `chmod -R 777 ${wordpress_content_path}`
+  const chmod_cmd = `chmod -R 777 ${wordpress_path}`
   execSync(chmod_cmd, { stdio: 'inherit' })
-
-  const wordpress_htaccess_path = path.join(wordpress_path, '.htacess')
-
-  const touch_htaccess_cmd = `touch ${wordpress_htaccess_path}`
-  execSync(touch_htaccess_cmd, { stdio: 'inherit' })
-
-  const chmod_htaccess_cmd = `chmod -R 777 ${wordpress_htaccess_path}`
-  execSync(chmod_htaccess_cmd, { stdio: 'inherit' })
 
   console.log('finished')
 }
