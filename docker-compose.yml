@@ -17,7 +17,6 @@ services:
     env_file:
       - .env
     volumes:
-      - "./versions/${WORDPRESS_VERSION}/wordpress:/var/www/html"
       - "./the-theme:/var/www/html/wp-content/themes/the-theme"
 
   db:
